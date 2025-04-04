@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProfileDocumentService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">profile_doc</a> &gt; <a href="index.source.html" class="el_package">com.example.profiledocument.service</a> &gt; <span class="el_source">ProfileDocumentService.java</span></div><h1>ProfileDocumentService.java</h1><pre class="source lang-java linenums">package com.example.profiledocument.service;
+
+import com.example.profiledocument.utility.Utility;
+import com.example.profiledocument.entity.ProfileDocument;
+import com.google.cloud.firestore.*;
+import com.google.firebase.cloud.StorageClient;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.InputStream;
+import java.time.LocalDateTime;
+import java.util.concurrent.ExecutionException;
+
+@Service
+public class ProfileDocumentService {
+    private static final String BUCKET_NAME = &quot;documentdoc&quot;;
+    private static final String COLLECTION_NAME = &quot;profile_doc&quot;;
+
+    private final Firestore firestore;
+    private final StorageClient storageClient;
+
+<span class="fc" id="L22">    public ProfileDocumentService(Firestore firestore, StorageClient storageClient) {</span>
+<span class="fc" id="L23">        this.firestore = firestore;</span>
+<span class="fc" id="L24">        this.storageClient = storageClient;</span>
+<span class="fc" id="L25">    }</span>
+
+    public String addProfessionalDocument(MultipartFile file) throws Exception {
+<span class="fc" id="L28">        String fileName = System.currentTimeMillis() + &quot;_&quot; + file.getOriginalFilename();</span>
+<span class="fc" id="L29">        InputStream fileInputStream = file.getInputStream();</span>
+<span class="fc" id="L30">        storageClient.bucket(BUCKET_NAME).create(fileName, fileInputStream, file.getContentType());</span>
+
+<span class="fc" id="L32">        String fileUrl = &quot;https://storage.googleapis.com/&quot; + BUCKET_NAME + &quot;/&quot; + fileName;</span>
+<span class="fc" id="L33">        String formattedDate = Utility.getTime(LocalDateTime.now());</span>
+
+<span class="fc" id="L35">        DocumentReference docRef = firestore.collection(COLLECTION_NAME).document();</span>
+<span class="fc" id="L36">        ProfileDocument document = new ProfileDocument();</span>
+<span class="fc" id="L37">        document.setId(docRef.getId());</span>
+<span class="fc" id="L38">        document.setProfileDocUrl(fileUrl);</span>
+<span class="fc" id="L39">        document.setCreatedDate(formattedDate);</span>
+<span class="fc" id="L40">        document.setUpdatedDate(formattedDate);</span>
+
+<span class="fc" id="L42">        docRef.set(document);</span>
+
+<span class="fc" id="L44">        return docRef.getId();</span>
+    }
+
+    public String updateProfessionalDocument(String documentId, MultipartFile newFile) throws Exception {
+<span class="fc" id="L48">        DocumentReference docRef = firestore.collection(COLLECTION_NAME).document(documentId);</span>
+<span class="fc" id="L49">        DocumentSnapshot snapshot = docRef.get().get();</span>
+
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">        if (!snapshot.exists()) {</span>
+<span class="nc" id="L52">            throw new Exception(&quot;Document not found!&quot;);</span>
+        }
+
+<span class="fc" id="L55">        ProfileDocument document = snapshot.toObject(ProfileDocument.class);</span>
+<span class="fc" id="L56">        String oldFileUrl = document.getProfileDocUrl();</span>
+
+<span class="pc bpc" id="L58" title="2 of 4 branches missed.">        if (oldFileUrl != null &amp;&amp; !oldFileUrl.isEmpty()) {</span>
+<span class="fc" id="L59">            String oldFileName = oldFileUrl.substring(oldFileUrl.lastIndexOf(&quot;/&quot;) + 1);</span>
+<span class="fc" id="L60">            storageClient.bucket(BUCKET_NAME).get(oldFileName).delete();</span>
+        }
+
+<span class="fc" id="L63">        String newFileName = System.currentTimeMillis() + &quot;_&quot; + newFile.getOriginalFilename();</span>
+<span class="fc" id="L64">        InputStream newFileInputStream = newFile.getInputStream();</span>
+<span class="fc" id="L65">        storageClient.bucket(BUCKET_NAME).create(newFileName, newFileInputStream, newFile.getContentType());</span>
+
+<span class="fc" id="L67">        String newFileUrl = &quot;https://storage.googleapis.com/&quot; + BUCKET_NAME + &quot;/&quot; + newFileName;</span>
+<span class="fc" id="L68">        document.setProfileDocUrl(newFileUrl);</span>
+<span class="fc" id="L69">        document.setUpdatedDate(Utility.getTime(LocalDateTime.now()));</span>
+<span class="fc" id="L70">        docRef.set(document);</span>
+
+<span class="fc" id="L72">        return &quot;File updated successfully, new URL: &quot; + newFileUrl;</span>
+    }
+
+    public ProfileDocument getProfessionalDocument(String id) throws ExecutionException, InterruptedException {
+<span class="fc" id="L76">        DocumentSnapshot snapshot = firestore.collection(COLLECTION_NAME).document(id).get().get();</span>
+
+<span class="pc bpc" id="L78" title="1 of 2 branches missed.">        if (snapshot.exists()) {</span>
+<span class="fc" id="L79">            return snapshot.toObject(ProfileDocument.class);</span>
+        }
+<span class="nc" id="L81">        return null;</span>
+    }
+
+    public String deleteProfessionalDocument(String documentId) throws Exception {
+<span class="fc" id="L85">        DocumentReference docRef = firestore.collection(COLLECTION_NAME).document(documentId);</span>
+<span class="fc" id="L86">        DocumentSnapshot snapshot = docRef.get().get();</span>
+
+<span class="pc bpc" id="L88" title="1 of 2 branches missed.">        if (!snapshot.exists()) {</span>
+<span class="nc" id="L89">            throw new Exception(&quot;Document not found!&quot;);</span>
+        }
+
+<span class="fc" id="L92">        ProfileDocument document = snapshot.toObject(ProfileDocument.class);</span>
+<span class="fc" id="L93">        String fileUrl = document.getProfileDocUrl();</span>
+
+<span class="pc bpc" id="L95" title="2 of 4 branches missed.">        if (fileUrl != null &amp;&amp; !fileUrl.isEmpty()) {</span>
+<span class="fc" id="L96">            String fileName = fileUrl.substring(fileUrl.lastIndexOf(&quot;/&quot;) + 1);</span>
+<span class="fc" id="L97">            storageClient.bucket(BUCKET_NAME).get(fileName).delete();</span>
+        }
+
+<span class="fc" id="L100">        docRef.delete();</span>
+<span class="fc" id="L101">        return &quot;File deleted successfully.&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

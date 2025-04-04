@@ -1,0 +1,6 @@
+projectKey=Profile_doc
+serverUrl=http://localhost:9000
+serverVersion=25.2.0.102705
+dashboardUrl=http://localhost:9000/dashboard?id=Profile_doc
+ceTaskId=89136eae-71cf-4c29-af75-f4592f6b4eff
+ceTaskUrl=http://localhost:9000/api/ce/task?id=89136eae-71cf-4c29-af75-f4592f6b4eff

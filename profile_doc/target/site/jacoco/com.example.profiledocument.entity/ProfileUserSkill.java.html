@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProfileUserSkill.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">profile_doc</a> &gt; <a href="index.source.html" class="el_package">com.example.profiledocument.entity</a> &gt; <span class="el_source">ProfileUserSkill.java</span></div><h1>ProfileUserSkill.java</h1><pre class="source lang-java linenums">package com.example.profiledocument.entity;
+
+import com.google.cloud.firestore.annotation.DocumentId;
+import com.google.cloud.firestore.annotation.PropertyName;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+<span class="pc bnc" id="L11" title="All 46 branches missed.">@Data</span>
+<span class="fc" id="L12">@NoArgsConstructor</span>
+<span class="nc" id="L13">@AllArgsConstructor</span>
+public class ProfileUserSkill {
+
+    @DocumentId
+<span class="fc" id="L17">    private String profileUserSkillId; // Unique ID</span>
+
+    @PropertyName(&quot;profile_user_id&quot;)
+<span class="nc" id="L20">    private String profileUserId;</span>
+
+    @PropertyName(&quot;created_date&quot;)
+<span class="nc" id="L23">    private String createdDate;</span>
+
+    @PropertyName(&quot;updated_date&quot;)
+<span class="nc" id="L26">    private String updatedDate;</span>
+
+    @PropertyName(&quot;skills&quot;)
+<span class="fc" id="L29">    private List&lt;String&gt; skills;</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProfileUserSkillService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">profile_doc</a> &gt; <a href="index.source.html" class="el_package">com.example.profiledocument.service</a> &gt; <span class="el_source">ProfileUserSkillService.java</span></div><h1>ProfileUserSkillService.java</h1><pre class="source lang-java linenums">package com.example.profiledocument.service;
+
+import com.example.profiledocument.entity.ProfileUserSkill;
+import com.example.profiledocument.utility.Utility;
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.WriteResult;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+@Service
+public class ProfileUserSkillService {
+
+    private static final String COLLECTION_NAME = &quot;profile_user_skills&quot;;
+    private final Firestore firestore;
+
+<span class="fc" id="L22">    public ProfileUserSkillService(Firestore firestore) {</span>
+<span class="fc" id="L23">        this.firestore = firestore;</span>
+<span class="fc" id="L24">    }</span>
+
+    // 🔹 Save ProfileUserSkill
+    public String saveProfileUserSkill(ProfileUserSkill profileSkill) throws ExecutionException, InterruptedException {
+<span class="fc" id="L28">        DocumentReference document = firestore.collection(COLLECTION_NAME).document();</span>
+<span class="fc" id="L29">        profileSkill.setProfileUserSkillId(document.getId());</span>
+
+<span class="fc" id="L31">        String formattedDate = Utility.getTime(LocalDateTime.now());</span>
+<span class="fc" id="L32">        profileSkill.setCreatedDate(formattedDate);</span>
+<span class="fc" id="L33">        profileSkill.setUpdatedDate(formattedDate);</span>
+
+<span class="fc" id="L35">        ApiFuture&lt;WriteResult&gt; writeResult = document.set(profileSkill);</span>
+<span class="fc" id="L36">        writeResult.get();</span>
+<span class="fc" id="L37">        return document.getId();</span>
+    }
+
+    // 🔹 Get ProfileUserSkill by ID
+    public ProfileUserSkill getProfileUserSkillById(String id) throws ExecutionException, InterruptedException {
+<span class="fc" id="L42">        DocumentSnapshot document = firestore.collection(COLLECTION_NAME).document(id).get().get();</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        if (document.exists()) {</span>
+<span class="fc" id="L44">            return document.toObject(ProfileUserSkill.class);</span>
+        }
+<span class="fc" id="L46">        return null;</span>
+    }
+
+    // 🔹 Update ProfileUserSkill
+    public String updateProfileUserSkill(String id, List&lt;String&gt; skills) throws ExecutionException, InterruptedException {
+<span class="fc" id="L51">        DocumentReference document = firestore.collection(COLLECTION_NAME).document(id);</span>
+<span class="fc" id="L52">        DocumentSnapshot snapshot = document.get().get();</span>
+
+<span class="fc bfc" id="L54" title="All 2 branches covered.">        if (snapshot.exists()) {</span>
+<span class="fc" id="L55">            ProfileUserSkill existingProfile = snapshot.toObject(ProfileUserSkill.class);</span>
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">            if (existingProfile != null) {</span>
+<span class="fc" id="L57">                existingProfile.setSkills(skills);</span>
+<span class="fc" id="L58">                existingProfile.setUpdatedDate(Utility.getTime(LocalDateTime.now()));</span>
+
+<span class="fc" id="L60">                ApiFuture&lt;WriteResult&gt; writeResult = document.set(existingProfile);</span>
+<span class="fc" id="L61">                writeResult.get();</span>
+<span class="fc" id="L62">                return &quot;ProfileUserSkill updated successfully!&quot;;</span>
+            }
+        }
+<span class="fc" id="L65">        return &quot;ProfileUserSkill not found!&quot;;</span>
+    }
+
+    // 🔹 Delete ProfileUserSkill by ID
+    public String deleteProfileUserSkill(String id) throws ExecutionException, InterruptedException {
+<span class="fc" id="L70">        ApiFuture&lt;WriteResult&gt; writeResult = firestore.collection(COLLECTION_NAME).document(id).delete();</span>
+<span class="fc" id="L71">        writeResult.get();</span>
+<span class="fc" id="L72">        return &quot;Document with ID &quot; + id + &quot; has been deleted.&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

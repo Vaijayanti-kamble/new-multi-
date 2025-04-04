@@ -1,0 +1,7 @@
+com\example\profiledocument\service\ProfileUserSkillServiceTest.class
+com\example\profiledocument\service\EmployeeServiceTest.class
+com\example\profiledocument\service\ProfileDocumentServiceTest.class
+com\example\profiledocument\config\FirebaseTestConfig.class
+com\example\profiledocument\ProfileDocApplication.class
+com\example\profiledocument\service\ProfileSkillVideoServiceTest.class
+com\example\profiledocument\service\UserProfessionDetailsServiceTest.class

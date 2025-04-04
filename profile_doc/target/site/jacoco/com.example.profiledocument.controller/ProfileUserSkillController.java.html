@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProfileUserSkillController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">profile_doc</a> &gt; <a href="index.source.html" class="el_package">com.example.profiledocument.controller</a> &gt; <span class="el_source">ProfileUserSkillController.java</span></div><h1>ProfileUserSkillController.java</h1><pre class="source lang-java linenums">package com.example.profiledocument.controller;
+
+import com.example.profiledocument.entity.ProfileUserSkill;
+import com.example.profiledocument.service.ProfileUserSkillService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+@RestController
+@RequestMapping(&quot;/profile-user-skills&quot;)
+public class ProfileUserSkillController {
+
+    private final ProfileUserSkillService profileUserSkillService;
+
+<span class="nc" id="L17">    public ProfileUserSkillController(ProfileUserSkillService profileUserSkillService) {</span>
+<span class="nc" id="L18">        this.profileUserSkillService = profileUserSkillService;</span>
+<span class="nc" id="L19">    }</span>
+
+    // 🔹 Create a new ProfileUserSkill
+    @PostMapping(&quot;/save&quot;)
+    public ResponseEntity&lt;String&gt; saveProfileUserSkill(@RequestBody ProfileUserSkill profileSkill) {
+        try {
+<span class="nc" id="L25">            String id = profileUserSkillService.saveProfileUserSkill(profileSkill);</span>
+<span class="nc" id="L26">            return ResponseEntity.ok(&quot;ProfileUserSkill created with ID: &quot; + id);</span>
+<span class="nc" id="L27">        } catch (ExecutionException e) {</span>
+<span class="nc" id="L28">            return ResponseEntity.internalServerError().body(&quot;Error saving ProfileUserSkill.&quot;);</span>
+<span class="nc" id="L29">        } catch (InterruptedException e) {</span>
+<span class="nc" id="L30">            Thread.currentThread().interrupt(); // 🔹 Re-interrupt the thread</span>
+<span class="nc" id="L31">            return ResponseEntity.internalServerError().body(&quot;Error saving ProfileUserSkill due to interruption.&quot;);</span>
+        }
+    }
+
+
+    // 🔹 Get ProfileUserSkill by ID
+    @GetMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;ProfileUserSkill&gt; getProfileUserSkillById(@PathVariable String id) {
+        try {
+<span class="nc" id="L40">            ProfileUserSkill profileSkill = profileUserSkillService.getProfileUserSkillById(id);</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">            if (profileSkill != null) {</span>
+<span class="nc" id="L42">                return ResponseEntity.ok(profileSkill);</span>
+            } else {
+<span class="nc" id="L44">                return ResponseEntity.notFound().build();</span>
+            }
+<span class="nc" id="L46">        } catch (ExecutionException e) {</span>
+<span class="nc" id="L47">            return ResponseEntity.internalServerError().build();</span>
+<span class="nc" id="L48">        } catch (InterruptedException e) {</span>
+<span class="nc" id="L49">            Thread.currentThread().interrupt(); // 🔹 Re-interrupt the thread</span>
+<span class="nc" id="L50">            return ResponseEntity.internalServerError().build();</span>
+        }
+    }
+
+
+    @PutMapping(&quot;/update/{id}&quot;)
+    public ResponseEntity&lt;String&gt; updateProfileUserSkill(@PathVariable String id, @RequestBody List&lt;String&gt; skills) {
+        try {
+<span class="nc" id="L58">            String message = profileUserSkillService.updateProfileUserSkill(id, skills);</span>
+<span class="nc" id="L59">            return ResponseEntity.ok(message);</span>
+<span class="nc" id="L60">        } catch (ExecutionException e) {</span>
+<span class="nc" id="L61">            return ResponseEntity.internalServerError().body(&quot;Error updating ProfileUserSkill.&quot;);</span>
+<span class="nc" id="L62">        } catch (InterruptedException e) {</span>
+<span class="nc" id="L63">            Thread.currentThread().interrupt(); // 🔹 Re-interrupt the thread</span>
+<span class="nc" id="L64">            return ResponseEntity.internalServerError().body(&quot;Error updating ProfileUserSkill due to interruption.&quot;);</span>
+        }
+    }
+
+
+    // 🔹 Delete ProfileUserSkill by ID
+    @DeleteMapping(&quot;/delete/{id}&quot;)
+    public ResponseEntity&lt;String&gt; deleteProfileUserSkill(@PathVariable String id) {
+        try {
+<span class="nc" id="L73">            String message = profileUserSkillService.deleteProfileUserSkill(id);</span>
+<span class="nc" id="L74">            return ResponseEntity.ok(message);</span>
+<span class="nc" id="L75">        } catch (ExecutionException e) {</span>
+<span class="nc" id="L76">            return ResponseEntity.internalServerError().body(&quot;Error deleting ProfileUserSkill.&quot;);</span>
+<span class="nc" id="L77">        } catch (InterruptedException e) {</span>
+<span class="nc" id="L78">            Thread.currentThread().interrupt(); // 🔹 Re-interrupt the thread</span>
+<span class="nc" id="L79">            return ResponseEntity.internalServerError().body(&quot;Error deleting ProfileUserSkill due to interruption.&quot;);</span>
+        }
+    }
+
+}
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

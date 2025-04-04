@@ -1,0 +1,5 @@
+com\example\employeedetails\config\FirestoreConfig.class
+com\example\employeedetails\service\EmployeeService.class
+com\example\employeedetails\controller\EmployeeController.class
+com\example\employeedetails\model\Employee.class
+com\example\employeedetails\EmployeeDetailsApplication.class

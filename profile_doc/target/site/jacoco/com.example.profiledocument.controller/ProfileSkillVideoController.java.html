@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProfileSkillVideoController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">profile_doc</a> &gt; <a href="index.source.html" class="el_package">com.example.profiledocument.controller</a> &gt; <span class="el_source">ProfileSkillVideoController.java</span></div><h1>ProfileSkillVideoController.java</h1><pre class="source lang-java linenums">package com.example.profiledocument.controller;
+
+import com.example.profiledocument.entity.ProfileSkillVideo;
+import com.example.profiledocument.service.ProfileSkillVideoService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.concurrent.ExecutionException;
+
+@RestController
+@RequestMapping(&quot;/profile-skill-video&quot;)
+public class ProfileSkillVideoController {
+
+    private final ProfileSkillVideoService service;
+    private static final String ERROR_MESSAGE = &quot;Error: &quot;;
+
+<span class="nc" id="L18">    public ProfileSkillVideoController(ProfileSkillVideoService service) {</span>
+<span class="nc" id="L19">        this.service = service;</span>
+<span class="nc" id="L20">    }</span>
+
+    @PostMapping(&quot;/upload&quot;)
+    public ResponseEntity&lt;String&gt; uploadVideo(@RequestParam(&quot;file&quot;) MultipartFile file) {
+        try {
+<span class="nc" id="L25">            String id = service.addVideo(file);</span>
+<span class="nc" id="L26">            return ResponseEntity.ok(&quot;Video uploaded successfully, ID: &quot; + id);</span>
+<span class="nc" id="L27">        } catch (Exception e) {</span>
+<span class="nc" id="L28">            return ResponseEntity.status(500).body(ERROR_MESSAGE + e.getMessage());</span>
+        }
+    }
+
+    @PostMapping(&quot;/update/{id}&quot;)
+    public ResponseEntity&lt;String&gt; updateVideo(@PathVariable String id, @RequestParam(&quot;file&quot;) MultipartFile file) {
+        try {
+<span class="nc" id="L35">            String response = service.updateVideo(id, file);</span>
+<span class="nc" id="L36">            return ResponseEntity.ok(response);</span>
+<span class="nc" id="L37">        } catch (Exception e) {</span>
+<span class="nc" id="L38">            return ResponseEntity.status(500).body(ERROR_MESSAGE + e.getMessage());</span>
+        }
+    }
+
+    @GetMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;ProfileSkillVideo&gt; getVideo(@PathVariable String id) {
+        try {
+<span class="nc" id="L45">            ProfileSkillVideo video = service.getVideo(id);</span>
+<span class="nc" id="L46">            return ResponseEntity.ok(video);</span>
+<span class="nc" id="L47">        } catch (ExecutionException e) {</span>
+<span class="nc" id="L48">            return ResponseEntity.status(500).body(null);</span>
+<span class="nc" id="L49">        } catch (Exception e) {</span>
+<span class="nc" id="L50">            Thread.currentThread().interrupt();</span>
+<span class="nc" id="L51">            return ResponseEntity.status(500).body(null);</span>
+        }
+    }
+
+    @DeleteMapping(&quot;/delete/{id}&quot;)
+    public ResponseEntity&lt;String&gt; deleteVideo(@PathVariable String id) {
+        try {
+<span class="nc" id="L58">            String response = service.deleteVideo(id);</span>
+<span class="nc" id="L59">            return ResponseEntity.ok(response);</span>
+<span class="nc" id="L60">        } catch (Exception e) {</span>
+<span class="nc" id="L61">            return ResponseEntity.status(500).body(ERROR_MESSAGE + e.getMessage());</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
