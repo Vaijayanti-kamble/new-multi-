@@ -13,7 +13,7 @@ import java.util.concurrent.ExecutionException;
 
 @Service
 public class ProfileDocumentService {
-    private static final String BUCKET_NAME = "documentdoc";
+    private static final String BUCKET_NAME = "documentdoct";
     private static final String COLLECTION_NAME = "profile_doc";
 
     private final Firestore firestore;

@@ -14,7 +14,7 @@ import java.util.concurrent.ExecutionException;
 
 @Service
 public class ProfileSkillVideoService {
-    private static final String BUCKET_NAME = "documentdoc";
+    private static final String BUCKET_NAME = "documentdoct";
     private static final String COLLECTION_NAME = "profile_and_skills";
     private static final String FOLDER_NAME = "profile_videos/";
 
