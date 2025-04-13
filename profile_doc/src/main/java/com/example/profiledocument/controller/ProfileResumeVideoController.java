@@ -1,7 +1,7 @@
 package com.example.profiledocument.controller;
 
-import com.example.profiledocument.entity.ProfileSkillVideo;
-import com.example.profiledocument.service.ProfileSkillVideoService;
+import com.example.profiledocument.entity.ProfileResumeVideo;
+import com.example.profiledocument.service.ProfileResumeVideoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,27 +9,27 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.concurrent.ExecutionException;
 
 @RestController
-@RequestMapping("/profile-skill-video")
-public class ProfileSkillVideoController {
+@RequestMapping("/profile-resume-video")
+public class ProfileResumeVideoController {
 
-    private final ProfileSkillVideoService service;
+    private final ProfileResumeVideoService service;
     private static final String ERROR_MESSAGE = "Error: ";
 
-    public ProfileSkillVideoController(ProfileSkillVideoService service) {
+    public ProfileResumeVideoController(ProfileResumeVideoService service) {
         this.service = service;
     }
 
-    @PostMapping("/upload")
+    @PostMapping("/save-profile-resume-video")
     public ResponseEntity<String> uploadVideo(@RequestParam("file") MultipartFile file) {
         try {
             String id = service.addVideo(file);
-            return ResponseEntity.ok("Video uploaded successfully, ID: " + id);
+            return ResponseEntity.ok("Video uploaded successfully, resumeVideoId: " + id);
         } catch (Exception e) {
             return ResponseEntity.status(500).body(ERROR_MESSAGE + e.getMessage());
         }
     }
 
-    @PostMapping("/update/{id}")
+    @PostMapping("/update-profile-resume-video/{id}")
     public ResponseEntity<String> updateVideo(@PathVariable String id, @RequestParam("file") MultipartFile file) {
         try {
             String response = service.updateVideo(id, file);
@@ -39,10 +39,10 @@ public class ProfileSkillVideoController {
         }
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ProfileSkillVideo> getVideo(@PathVariable String id) {
+    @GetMapping("/get-profile-resume-video/{id}")
+    public ResponseEntity<ProfileResumeVideo> getVideo(@PathVariable String id) {
         try {
-            ProfileSkillVideo video = service.getVideo(id);
+            ProfileResumeVideo video = service.getVideo(id);
             return ResponseEntity.ok(video);
         } catch (ExecutionException e) {
             return ResponseEntity.status(500).body(null);
@@ -52,7 +52,7 @@ public class ProfileSkillVideoController {
         }
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete-profile-resume-video/{id}")
     public ResponseEntity<String> deleteVideo(@PathVariable String id) {
         try {
             String response = service.deleteVideo(id);

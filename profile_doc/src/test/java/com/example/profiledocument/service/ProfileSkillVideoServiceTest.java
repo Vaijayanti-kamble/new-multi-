@@ -1,6 +1,6 @@
 package com.example.profiledocument.service;
 
-import com.example.profiledocument.entity.ProfileSkillVideo;
+import com.example.profiledocument.entity.ProfileResumeVideo;
 import com.example.profiledocument.utility.Utility;
 import com.google.api.core.ApiFutures;
 import com.google.cloud.firestore.*;
@@ -49,7 +49,7 @@ class ProfileSkillVideoServiceTest {
     private DocumentSnapshot documentSnapshot;
 
     @InjectMocks
-    private ProfileSkillVideoService service;
+    private ProfileResumeVideoService service;
 
     private MultipartFile mockFile;
 
@@ -90,7 +90,7 @@ class ProfileSkillVideoServiceTest {
 
         // ✅ Verify interactions
         verify(collectionReference).document();
-        verify(documentReference).set(any(ProfileSkillVideo.class));
+        verify(documentReference).set(any(ProfileResumeVideo.class));
         verify(bucket).create(anyString(), any(InputStream.class), anyString());
     }
 
@@ -98,7 +98,7 @@ class ProfileSkillVideoServiceTest {
     @Test
     void testUpdateVideo() throws Exception {
         String videoId = "test-id";
-        ProfileSkillVideo video = new ProfileSkillVideo();
+        ProfileResumeVideo video = new ProfileResumeVideo();
         video.setProfileSkillVideoUrl("https://storage.googleapis.com/test-bucket/old-video.mp4");
 
         // ✅ Correctly mocking Firestore collection and document
@@ -106,7 +106,7 @@ class ProfileSkillVideoServiceTest {
         when(collectionReference.document(eq(videoId))).thenReturn(documentReference);
         when(documentReference.get()).thenReturn(ApiFutures.immediateFuture(documentSnapshot));
         when(documentSnapshot.exists()).thenReturn(true);
-        when(documentSnapshot.toObject(ProfileSkillVideo.class)).thenReturn(video);
+        when(documentSnapshot.toObject(ProfileResumeVideo.class)).thenReturn(video);
 
         // ✅ Correctly mocking old Blob for deletion
         when(storageClient.bucket(anyString())).thenReturn(bucket);
@@ -129,7 +129,7 @@ class ProfileSkillVideoServiceTest {
         }
 
         // ✅ Verify interactions
-        verify(documentReference).set(any(ProfileSkillVideo.class));
+        verify(documentReference).set(any(ProfileResumeVideo.class));
         verify(blob).delete();
         verify(bucket).create(anyString(), any(InputStream.class), anyString());
     }
@@ -138,8 +138,8 @@ class ProfileSkillVideoServiceTest {
     @Test
     void testGetVideo() throws Exception {
         String videoId = "test-id";
-        ProfileSkillVideo video = new ProfileSkillVideo();
-        video.setId(videoId);
+        ProfileResumeVideo video = new ProfileResumeVideo();
+        video.setResumeVideoId(videoId);
         video.setProfileSkillVideoUrl("https://storage.googleapis.com/test-bucket/test-video.mp4");
 
         // Mock Firestore collection and document
@@ -147,14 +147,14 @@ class ProfileSkillVideoServiceTest {
         when(collectionReference.document(videoId)).thenReturn(documentReference);
         when(documentReference.get()).thenReturn(ApiFutures.immediateFuture(documentSnapshot));
         when(documentSnapshot.exists()).thenReturn(true);
-        when(documentSnapshot.toObject(ProfileSkillVideo.class)).thenReturn(video);
+        when(documentSnapshot.toObject(ProfileResumeVideo.class)).thenReturn(video);
 
         // Call the service method
-        ProfileSkillVideo result = service.getVideo(videoId);
+        ProfileResumeVideo result = service.getVideo(videoId);
 
         // Assert
         assertNotNull(result);
-        assertEquals(videoId, result.getId());
+        assertEquals(videoId, result.getResumeVideoId());
         assertEquals("https://storage.googleapis.com/test-bucket/test-video.mp4", result.getProfileSkillVideoUrl());
     }
 
@@ -162,7 +162,7 @@ class ProfileSkillVideoServiceTest {
     @Test
     void testDeleteVideo() throws Exception {
         String videoId = "test-id";
-        ProfileSkillVideo video = new ProfileSkillVideo();
+        ProfileResumeVideo video = new ProfileResumeVideo();
         video.setProfileSkillVideoUrl("https://storage.googleapis.com/test-bucket/old-video.mp4");
 
         // Mock Firestore collection and document
@@ -170,7 +170,7 @@ class ProfileSkillVideoServiceTest {
         when(collectionReference.document(videoId)).thenReturn(documentReference);
         when(documentReference.get()).thenReturn(ApiFutures.immediateFuture(documentSnapshot));
         when(documentSnapshot.exists()).thenReturn(true);
-        when(documentSnapshot.toObject(ProfileSkillVideo.class)).thenReturn(video);
+        when(documentSnapshot.toObject(ProfileResumeVideo.class)).thenReturn(video);
 
         // Mock Blob Storage
         when(storageClient.bucket(any())).thenReturn(bucket);

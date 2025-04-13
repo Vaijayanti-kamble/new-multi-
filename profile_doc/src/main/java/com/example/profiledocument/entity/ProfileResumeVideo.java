@@ -2,9 +2,9 @@ package com.example.profiledocument.entity;
 
 import com.google.cloud.firestore.annotation.PropertyName;
 
-public class ProfileSkillVideo {
-    @PropertyName("id")
-    private String id;
+public class ProfileResumeVideo {
+    @PropertyName("resume_video_id")
+    private String resumeVideoId;
 
     @PropertyName("profile_skill_video_url")
     private String profileSkillVideoUrl;
@@ -16,14 +16,14 @@ public class ProfileSkillVideo {
     private String updatedDate;
 
     // Getters and Setters
-    @PropertyName("id")
-    public String getId() {
-        return id;
+    @PropertyName("resume_video_id")
+    public String getResumeVideoId() {
+        return resumeVideoId;
     }
 
-    @PropertyName("id")
-    public void setId(String id) {
-        this.id = id;
+    @PropertyName("resume_video_id")
+    public void setResumeVideoId(String resumeVideoId) {
+        this.resumeVideoId = resumeVideoId;
     }
 
     @PropertyName("profile_skill_video_url")

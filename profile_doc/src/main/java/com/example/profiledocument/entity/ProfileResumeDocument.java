@@ -2,21 +2,20 @@ package com.example.profiledocument.entity;
 
 import com.google.cloud.firestore.annotation.PropertyName;
 
-public class ProfileDocument {
-    private String id;
+public class ProfileResumeDocument {
+    private String resumeDocumentId;
     private String profileDocUrl;
     private String createdDate;
     private String updatedDate;
 
-    // Getters and Setters with @PropertyName for Firestore mapping
-    @PropertyName("id")
-    public String getId() {
-        return id;
+    @PropertyName("resume_document_id")
+    public String getResumeDocumentId() {
+        return resumeDocumentId;
     }
 
-    @PropertyName("id")
-    public void setId(String id) {
-        this.id = id;
+    @PropertyName("resume_document_id")
+    public void setResumeDocumentId(String resumeDocumentId) {
+        this.resumeDocumentId = resumeDocumentId;
     }
 
     @PropertyName("profile_doc_url")

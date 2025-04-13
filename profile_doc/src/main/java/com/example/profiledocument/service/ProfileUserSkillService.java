@@ -26,7 +26,7 @@ public class ProfileUserSkillService {
     // 🔹 Save ProfileUserSkill
     public String saveProfileUserSkill(ProfileUserSkill profileSkill) throws ExecutionException, InterruptedException {
         DocumentReference document = firestore.collection(COLLECTION_NAME).document();
-        profileSkill.setProfileUserSkillId(document.getId());
+        profileSkill.setUserSkillId(document.getId());  // Updated field name
 
         String formattedDate = Utility.getTime(LocalDateTime.now());
         profileSkill.setCreatedDate(formattedDate);

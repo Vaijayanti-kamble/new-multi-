@@ -17,7 +17,7 @@ public class FirebaseConfig {
 
     @Bean
     public FirebaseApp firebaseApp() throws IOException {
-        InputStream serviceAccount = getClass().getClassLoader().getResourceAsStream("profession-details-456208-ebaef27d9d4d.json");
+        InputStream serviceAccount = getClass().getClassLoader().getResourceAsStream("profession-details-456208-cb008305ed05.json");
 
         if (serviceAccount == null) {
             throw new IOException("Service account file not found");

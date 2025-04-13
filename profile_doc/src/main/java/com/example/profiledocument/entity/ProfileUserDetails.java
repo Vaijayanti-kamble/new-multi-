@@ -8,10 +8,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UserProfessionDetails {
+public class ProfileUserDetails {
 
-    @PropertyName("document_id")
-    private String documentId;
+    @PropertyName("user_details_id")
+    private String userDetailsId;
 
     @NotEmpty(message = "First name is required")
     @PropertyName("first_name")
@@ -50,14 +50,14 @@ public class UserProfessionDetails {
     private String otherProfessions;
 
     // Getters and Setters with @PropertyName annotations
-    @PropertyName("document_id")
-    public String getDocumentId() {
-        return documentId;
+    @PropertyName("user_details_id")
+    public String getUserDetailsId() {
+        return userDetailsId;
     }
 
-    @PropertyName("document_id")
-    public void setDocumentId(String documentId) {
-        this.documentId = documentId;
+    @PropertyName("user_details_id")
+    public void setUserDetailsId(String userDetailsId) {
+        this.userDetailsId = userDetailsId;
     }
 
     @PropertyName("first_name")

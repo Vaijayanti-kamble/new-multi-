@@ -4,18 +4,72 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb89f5c0-632f-4586-8377-0922e85d8180" name="Changes" comment="updated 1">
-      <change afterPath="$PROJECT_DIR$/employee-details/src/main/resources/service-registration-project-f52bf3ff46ba.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/profile_doc/src/main/resources/profession-details-456208-ebaef27d9d4d.json" afterDir="false" />
+    <list default="true" id="bb89f5c0-632f-4586-8377-0922e85d8180" name="Changes" comment="updated 2">
+      <change afterPath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/controller/ProfileUserAddressController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/entity/ProfileAddress.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/entity/ProfileUserAddress.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/entity/ProfileUserEmail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/service/ProfileUserAddressService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/profile_doc/src/main/resources/profession-details-456208-cb008305ed05.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/config/FirebaseConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/config/FirebaseConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/service/ProfileDocumentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/service/ProfileDocumentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/service/ProfileSkillVideoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/service/ProfileSkillVideoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/controller/ProfileUserEmailController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/controller/ProfileDocumentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/controller/ProfileResumeDocumentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/controller/ProfileSkillVideoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/controller/ProfileResumeVideoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/controller/ProfileUserSkillController.java" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/controller/ProfileUserSkillController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/controller/SearchController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/controller/UserAddressController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/controller/UserProfessionDetailsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/controller/ProfileUserDetailsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/dto/SearchResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/dto/SearchResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/entity/Employee.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/entity/ProfileDocument.java" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/entity/ProfileResumeDocument.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/entity/ProfileSkillVideo.java" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/entity/ProfileResumeVideo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/entity/ProfileUserSkill.java" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/entity/ProfileUserSkill.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/entity/UserAddress.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/entity/UserProfessionDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/entity/ProfileUserDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/service/ProfileUserEmailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/service/ProfileDocumentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/service/ProfileResumeDocumentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/service/ProfileSkillVideoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/service/ProfileResumeVideoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/service/ProfileUserSkillService.java" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/service/ProfileUserSkillService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/service/SearchService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/service/UserAddressService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/service/UserProfessionDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/src/main/java/com/example/profiledocument/service/ProfileUserDetailsService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/profile_doc/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/src/main/resources/profession-details-456208-ebaef27d9d4d.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/src/test/java/com/example/profiledocument/service/EmployeeServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/src/test/java/com/example/profiledocument/service/EmployeeServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/src/test/java/com/example/profiledocument/service/ProfileDocumentServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/src/test/java/com/example/profiledocument/service/ProfileDocumentServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/src/test/java/com/example/profiledocument/service/ProfileSkillVideoServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/src/test/java/com/example/profiledocument/service/ProfileSkillVideoServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/src/test/java/com/example/profiledocument/service/ProfileUserSkillServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/src/test/java/com/example/profiledocument/service/ProfileUserSkillServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/src/test/java/com/example/profiledocument/service/UserProfessionDetailsServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/src/test/java/com/example/profiledocument/service/UserProfessionDetailsServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/profile_doc/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/target/classes/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/config/FirebaseConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/config/FirebaseConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/service/ProfileDocumentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/service/ProfileDocumentService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/service/ProfileSkillVideoService.class" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/service/ProfileSkillVideoService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/controller/EmployeeController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/controller/ProfileDocumentController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/controller/ProfileSkillVideoController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/controller/ProfileUserSkillController.class" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/controller/ProfileUserSkillController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/controller/SearchController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/controller/UserAddressController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/controller/UserProfessionDetailsController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/dto/SearchResult.class" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/dto/SearchResult.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/entity/Employee.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/entity/ProfileDocument.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/entity/ProfileSkillVideo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/entity/ProfileUserSkill.class" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/entity/ProfileUserSkill.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/entity/UserAddress.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/entity/UserProfessionDetails.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/service/EmployeeService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/service/ProfileDocumentService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/service/ProfileSkillVideoService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/service/ProfileUserSkillService.class" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/service/ProfileUserSkillService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/service/SearchService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/service/UserAddressService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/target/classes/com/example/profiledocument/service/UserProfessionDetailsService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/target/classes/profession-details-26438cf435dd.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/target/test-classes/com/example/profiledocument/service/EmployeeServiceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/target/test-classes/com/example/profiledocument/service/EmployeeServiceTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/target/test-classes/com/example/profiledocument/service/ProfileDocumentServiceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/target/test-classes/com/example/profiledocument/service/ProfileDocumentServiceTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/target/test-classes/com/example/profiledocument/service/ProfileSkillVideoServiceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/target/test-classes/com/example/profiledocument/service/ProfileSkillVideoServiceTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/target/test-classes/com/example/profiledocument/service/ProfileUserSkillServiceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/target/test-classes/com/example/profiledocument/service/ProfileUserSkillServiceTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_doc/target/test-classes/com/example/profiledocument/service/UserProfessionDetailsServiceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/profile_doc/target/test-classes/com/example/profiledocument/service/UserProfessionDetailsServiceTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,6 +145,8 @@
     "JUnit.ProfileSkillVideoServiceTest.testGetVideo.executor": "Run",
     "JUnit.ProfileSkillVideoServiceTest.testUpdateVideo.executor": "Run",
     "JUnit.ProfileUserSkillServiceTest.executor": "Run",
+    "JUnit.UserAddressServiceTest.executor": "Run",
+    "JUnit.UserAddressServiceTest.testAddAddress.executor": "Run",
     "JUnit.UserProfessionDetailsControllerTest.executor": "Run",
     "JUnit.UserProfessionDetailsControllerTest.testDeleteUserProfessionDetails.executor": "Run",
     "JUnit.UserProfessionDetailsControllerTest.testGetUserProfessionDetailsById_NotFound.executor": "Run",
@@ -142,7 +198,7 @@
       <module name="profile-doc" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.profiledocument.service.*" />
+          <option name="PATTERN" value="com.example.profiledocument.service.ProfileResumeDocumentService" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -157,27 +213,12 @@
       <module name="profile-doc" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.profiledocument.service.*" />
+          <option name="PATTERN" value="com.example.profiledocument.service.ProfileResumeDocumentService" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.example.profiledocument.service" />
       <option name="MAIN_CLASS_NAME" value="com.example.profiledocument.service.ProfileDocumentServiceTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ProfileSkillVideoServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="profile-doc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.profiledocument.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.example.profiledocument.service" />
-      <option name="MAIN_CLASS_NAME" value="com.example.profiledocument.service.ProfileSkillVideoServiceTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -191,17 +232,33 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserProfessionDetailsServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserAddressServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="profile-doc" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.profiledocument.service.*" />
+          <option name="PATTERN" value="com.example.profiledocument.service.ProfileResumeDocumentService" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.example.profiledocument.service" />
-      <option name="MAIN_CLASS_NAME" value="com.example.profiledocument.service.UserProfessionDetailsServiceTest" />
+      <option name="MAIN_CLASS_NAME" value="com.example.profiledocument.service.UserAddressServiceTest" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserAddressServiceTest.testAddAddress" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="profile-doc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.profiledocument.service.ProfileResumeDocumentService" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.profiledocument.service" />
+      <option name="MAIN_CLASS_NAME" value="com.example.profiledocument.service.UserAddressServiceTest" />
+      <option name="METHOD_NAME" value="testAddAddress" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -209,18 +266,18 @@
     <list>
       <item itemvalue="Application.ProfileDocApplication" />
       <item itemvalue="JUnit.Unnamed" />
+      <item itemvalue="JUnit.UserAddressServiceTest" />
+      <item itemvalue="JUnit.UserAddressServiceTest.testAddAddress" />
       <item itemvalue="JUnit.EmployeeServiceTest" />
-      <item itemvalue="JUnit.ProfileSkillVideoServiceTest" />
-      <item itemvalue="JUnit.UserProfessionDetailsServiceTest" />
       <item itemvalue="JUnit.ProfileDocumentServiceTest" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.ProfileDocApplication" />
+        <item itemvalue="JUnit.UserAddressServiceTest" />
+        <item itemvalue="JUnit.UserAddressServiceTest.testAddAddress" />
         <item itemvalue="JUnit.EmployeeServiceTest" />
         <item itemvalue="JUnit.ProfileDocumentServiceTest" />
-        <item itemvalue="JUnit.UserProfessionDetailsServiceTest" />
-        <item itemvalue="JUnit.ProfileSkillVideoServiceTest" />
       </list>
     </recent_temporary>
   </component>
@@ -265,7 +322,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743755618119</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="updated 2">
+      <option name="closed" value="true" />
+      <created>1744104157507</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1744104157507</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -285,7 +350,8 @@
     <MESSAGE value="updated commit" />
     <MESSAGE value="updated" />
     <MESSAGE value="updated 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated 1" />
+    <MESSAGE value="updated 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated 2" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/employees_information$ProfileDocumentServiceTest_testUpdateProfessionalDocument_DocumentNotFound.exec" NAME="ProfileDocumentServiceTest.testUpdateProfessionalDocument_DocumentNotFound Coverage Results" MODIFIED="1742787661363" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="jacoco" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">

@@ -6,11 +6,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EmployeeServiceTest {
 
-    private EmployeeService employeeService;
+    private ProfileUserEmailService employeeService;
 
     @BeforeEach
     void setUp() {
-        employeeService = new EmployeeService();
+        employeeService = new ProfileUserEmailService();
     }
 
     // 🔹 Test Valid Email

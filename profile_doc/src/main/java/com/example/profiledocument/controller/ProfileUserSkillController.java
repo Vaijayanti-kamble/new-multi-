@@ -19,11 +19,11 @@ public class ProfileUserSkillController {
     }
 
     // 🔹 Create a new ProfileUserSkill
-    @PostMapping("/save")
+    @PostMapping("/save-user-skills")
     public ResponseEntity<String> saveProfileUserSkill(@RequestBody ProfileUserSkill profileSkill) {
         try {
             String id = profileUserSkillService.saveProfileUserSkill(profileSkill);
-            return ResponseEntity.ok("ProfileUserSkill created with ID: " + id);
+            return ResponseEntity.ok("UserSkillID: " + id);
         } catch (ExecutionException e) {
             return ResponseEntity.internalServerError().body("Error saving ProfileUserSkill.");
         } catch (InterruptedException e) {
@@ -32,9 +32,8 @@ public class ProfileUserSkillController {
         }
     }
 
-
     // 🔹 Get ProfileUserSkill by ID
-    @GetMapping("/{id}")
+    @GetMapping("/get-user-skills/{id}")
     public ResponseEntity<ProfileUserSkill> getProfileUserSkillById(@PathVariable String id) {
         try {
             ProfileUserSkill profileSkill = profileUserSkillService.getProfileUserSkillById(id);
@@ -46,13 +45,13 @@ public class ProfileUserSkillController {
         } catch (ExecutionException e) {
             return ResponseEntity.internalServerError().build();
         } catch (InterruptedException e) {
-            Thread.currentThread().interrupt(); // 🔹 Re-interrupt the thread
+            Thread.currentThread().interrupt();
             return ResponseEntity.internalServerError().build();
         }
     }
 
-
-    @PutMapping("/update/{id}")
+    // 🔹 Update
+    @PutMapping("/update-user-skills/{id}")
     public ResponseEntity<String> updateProfileUserSkill(@PathVariable String id, @RequestBody List<String> skills) {
         try {
             String message = profileUserSkillService.updateProfileUserSkill(id, skills);
@@ -60,14 +59,13 @@ public class ProfileUserSkillController {
         } catch (ExecutionException e) {
             return ResponseEntity.internalServerError().body("Error updating ProfileUserSkill.");
         } catch (InterruptedException e) {
-            Thread.currentThread().interrupt(); // 🔹 Re-interrupt the thread
+            Thread.currentThread().interrupt();
             return ResponseEntity.internalServerError().body("Error updating ProfileUserSkill due to interruption.");
         }
     }
 
-
-    // 🔹 Delete ProfileUserSkill by ID
-    @DeleteMapping("/delete/{id}")
+    // 🔹 Delete
+    @DeleteMapping("/delete-user-skills/{id}")
     public ResponseEntity<String> deleteProfileUserSkill(@PathVariable String id) {
         try {
             String message = profileUserSkillService.deleteProfileUserSkill(id);
@@ -75,11 +73,8 @@ public class ProfileUserSkillController {
         } catch (ExecutionException e) {
             return ResponseEntity.internalServerError().body("Error deleting ProfileUserSkill.");
         } catch (InterruptedException e) {
-            Thread.currentThread().interrupt(); // 🔹 Re-interrupt the thread
+            Thread.currentThread().interrupt();
             return ResponseEntity.internalServerError().body("Error deleting ProfileUserSkill due to interruption.");
         }
     }
-
 }
-
-

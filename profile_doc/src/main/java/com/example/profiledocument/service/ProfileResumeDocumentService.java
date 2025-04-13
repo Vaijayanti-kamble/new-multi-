@@ -1,7 +1,7 @@
 package com.example.profiledocument.service;
 
 import com.example.profiledocument.utility.Utility;
-import com.example.profiledocument.entity.ProfileDocument;
+import com.example.profiledocument.entity.ProfileResumeDocument;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.StorageClient;
 import org.springframework.stereotype.Service;
@@ -12,14 +12,14 @@ import java.time.LocalDateTime;
 import java.util.concurrent.ExecutionException;
 
 @Service
-public class ProfileDocumentService {
+public class ProfileResumeDocumentService {
     private static final String BUCKET_NAME = "documentdoct";
     private static final String COLLECTION_NAME = "profile_doc";
 
     private final Firestore firestore;
     private final StorageClient storageClient;
 
-    public ProfileDocumentService(Firestore firestore, StorageClient storageClient) {
+    public ProfileResumeDocumentService(Firestore firestore, StorageClient storageClient) {
         this.firestore = firestore;
         this.storageClient = storageClient;
     }
@@ -33,8 +33,8 @@ public class ProfileDocumentService {
         String formattedDate = Utility.getTime(LocalDateTime.now());
 
         DocumentReference docRef = firestore.collection(COLLECTION_NAME).document();
-        ProfileDocument document = new ProfileDocument();
-        document.setId(docRef.getId());
+        ProfileResumeDocument document = new ProfileResumeDocument();
+        document.setResumeDocumentId(docRef.getId());
         document.setProfileDocUrl(fileUrl);
         document.setCreatedDate(formattedDate);
         document.setUpdatedDate(formattedDate);
@@ -44,15 +44,15 @@ public class ProfileDocumentService {
         return docRef.getId();
     }
 
-    public String updateProfessionalDocument(String documentId, MultipartFile newFile) throws Exception {
-        DocumentReference docRef = firestore.collection(COLLECTION_NAME).document(documentId);
+    public String updateProfessionalDocument(String resumeDocumentId, MultipartFile newFile) throws Exception {
+        DocumentReference docRef = firestore.collection(COLLECTION_NAME).document(resumeDocumentId);
         DocumentSnapshot snapshot = docRef.get().get();
 
         if (!snapshot.exists()) {
             throw new Exception("Document not found!");
         }
 
-        ProfileDocument document = snapshot.toObject(ProfileDocument.class);
+        ProfileResumeDocument document = snapshot.toObject(ProfileResumeDocument.class);
         String oldFileUrl = document.getProfileDocUrl();
 
         if (oldFileUrl != null && !oldFileUrl.isEmpty()) {
@@ -72,24 +72,24 @@ public class ProfileDocumentService {
         return "File updated successfully, new URL: " + newFileUrl;
     }
 
-    public ProfileDocument getProfessionalDocument(String id) throws ExecutionException, InterruptedException {
-        DocumentSnapshot snapshot = firestore.collection(COLLECTION_NAME).document(id).get().get();
+    public ProfileResumeDocument getProfessionalDocument(String resumeDocumentId) throws ExecutionException, InterruptedException {
+        DocumentSnapshot snapshot = firestore.collection(COLLECTION_NAME).document(resumeDocumentId).get().get();
 
         if (snapshot.exists()) {
-            return snapshot.toObject(ProfileDocument.class);
+            return snapshot.toObject(ProfileResumeDocument.class);
         }
         return null;
     }
 
-    public String deleteProfessionalDocument(String documentId) throws Exception {
-        DocumentReference docRef = firestore.collection(COLLECTION_NAME).document(documentId);
+    public String deleteProfessionalDocument(String resumeDocumentId) throws Exception {
+        DocumentReference docRef = firestore.collection(COLLECTION_NAME).document(resumeDocumentId);
         DocumentSnapshot snapshot = docRef.get().get();
 
         if (!snapshot.exists()) {
             throw new Exception("Document not found!");
         }
 
-        ProfileDocument document = snapshot.toObject(ProfileDocument.class);
+        ProfileResumeDocument document = snapshot.toObject(ProfileResumeDocument.class);
         String fileUrl = document.getProfileDocUrl();
 
         if (fileUrl != null && !fileUrl.isEmpty()) {

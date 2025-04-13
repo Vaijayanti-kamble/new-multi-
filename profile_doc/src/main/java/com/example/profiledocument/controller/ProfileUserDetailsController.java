@@ -1,65 +1,62 @@
 package com.example.profiledocument.controller;
 
-import com.example.profiledocument.entity.UserProfessionDetails;
-import com.example.profiledocument.service.UserProfessionDetailsService;
+import com.example.profiledocument.entity.ProfileUserDetails;
+import com.example.profiledocument.service.ProfileUserDetailsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/user-profession-details")
-public class UserProfessionDetailsController {
+@RequestMapping("/profile-user-details")
+public class ProfileUserDetailsController {
 
     private static final String ERROR_MESSAGE = "Error: ";
     private static final String INTERRUPTED_MESSAGE = "Operation was interrupted.";
-    private final UserProfessionDetailsService service;
+    private final ProfileUserDetailsService service;
 
-    public UserProfessionDetailsController(UserProfessionDetailsService service) {
+    public ProfileUserDetailsController(ProfileUserDetailsService service) {
         this.service = service;
     }
 
-    @PostMapping
-    public ResponseEntity<String> saveUserProfessionDetails(@RequestBody UserProfessionDetails details) {
+    @PostMapping("/save-user-details")
+    public ResponseEntity<String> saveUserProfessionDetails(@RequestBody ProfileUserDetails details) {
         try {
             String id = service.saveUserProfessionDetails(details);
-            return ResponseEntity.ok("Saved with ID: " + id);
+            return ResponseEntity.ok("Saved with userDetailsId: " + id);
         } catch (InterruptedException e) {
-            Thread.currentThread().interrupt(); // 🔹 Re-interrupt the thread
+            Thread.currentThread().interrupt();
             return ResponseEntity.status(500).body(ERROR_MESSAGE + INTERRUPTED_MESSAGE);
         } catch (Exception e) {
             return ResponseEntity.status(500).body(ERROR_MESSAGE + e.getMessage());
         }
     }
 
-
-    @GetMapping("/{id}")
+    @GetMapping("/get-user-details/{id}")
     public ResponseEntity<Object> getUserProfessionDetailsById(@PathVariable String id) {
         try {
-            UserProfessionDetails details = service.getUserProfessionDetailsById(id);
+            ProfileUserDetails details = service.getUserProfessionDetailsById(id);
             if (details != null) {
                 return ResponseEntity.ok(details);
             } else {
                 return ResponseEntity.status(404).body("No document found with ID: " + id);
             }
         } catch (InterruptedException e) {
-            Thread.currentThread().interrupt(); // Re-interrupt the thread
+            Thread.currentThread().interrupt();
             return ResponseEntity.status(500).body(ERROR_MESSAGE + INTERRUPTED_MESSAGE);
         } catch (Exception e) {
             return ResponseEntity.status(500).body(ERROR_MESSAGE + e.getMessage());
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete-user-details/{id}")
     public ResponseEntity<String> deleteUserProfessionDetails(@PathVariable String id) {
         try {
             String result = service.deleteUserProfessionDetails(id);
             return ResponseEntity.ok(result);
         } catch (InterruptedException e) {
-            Thread.currentThread().interrupt(); // 🔹 Re-interrupt the thread
+            Thread.currentThread().interrupt();
             return ResponseEntity.status(500).body(ERROR_MESSAGE + INTERRUPTED_MESSAGE);
         } catch (Exception e) {
             return ResponseEntity.status(500).body(ERROR_MESSAGE + e.getMessage());
         }
     }
-
 }
-

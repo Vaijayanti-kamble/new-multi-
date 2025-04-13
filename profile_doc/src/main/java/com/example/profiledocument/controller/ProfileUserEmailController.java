@@ -1,7 +1,7 @@
 package com.example.profiledocument.controller;
 
-import com.example.profiledocument.entity.Employee;
-import com.example.profiledocument.service.EmployeeService;
+import com.example.profiledocument.entity.ProfileUserEmail;
+import com.example.profiledocument.service.ProfileUserEmailService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -9,18 +9,18 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/employees")
+@RequestMapping("/user-email")
 @Validated
-public class EmployeeController {
+public class ProfileUserEmailController {
 
-    private final EmployeeService employeeService;
+    private final ProfileUserEmailService employeeService;
 
-    public EmployeeController(EmployeeService employeeService) {
+    public ProfileUserEmailController(ProfileUserEmailService employeeService) {
         this.employeeService = employeeService;
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<String> addEmployee(@Valid @RequestBody Employee employee) {
+    @PostMapping("/add-user-email")
+    public ResponseEntity<String> addEmployee(@Valid @RequestBody ProfileUserEmail employee) {
         if (!employeeService.isValidEmail(employee.getEmail())) {
             return ResponseEntity.badRequest().body("Invalid email format");
         }

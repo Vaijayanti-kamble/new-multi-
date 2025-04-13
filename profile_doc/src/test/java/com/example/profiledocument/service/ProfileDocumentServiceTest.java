@@ -1,6 +1,6 @@
 package com.example.profiledocument.service;
 
-import com.example.profiledocument.entity.ProfileDocument;
+import com.example.profiledocument.entity.ProfileResumeDocument;
 import com.example.profiledocument.utility.Utility;
 import com.google.api.core.ApiFutures;
 import com.google.cloud.firestore.*;
@@ -48,7 +48,7 @@ class ProfileDocumentServiceTest {
     private DocumentSnapshot documentSnapshot;
 
     @InjectMocks
-    private ProfileDocumentService service;
+    private ProfileResumeDocumentService service;
 
     private MultipartFile mockFile;
 
@@ -85,7 +85,7 @@ class ProfileDocumentServiceTest {
 
         // Verify interactions only for methods actually called
         verify(collectionReference).document();
-        verify(documentReference).set(any(ProfileDocument.class));
+        verify(documentReference).set(any(ProfileResumeDocument.class));
         verify(bucket).create(anyString(), any(InputStream.class), anyString());
 
     }
@@ -94,14 +94,14 @@ class ProfileDocumentServiceTest {
     @Test
     void testUpdateDocument() throws Exception {
         String documentId = "test-id";
-        ProfileDocument document = new ProfileDocument();
+        ProfileResumeDocument document = new ProfileResumeDocument();
         document.setProfileDocUrl("https://storage.googleapis.com/documentdoc/old-document.pdf");
 
         when(firestore.collection(anyString())).thenReturn(collectionReference);
         when(collectionReference.document(eq(documentId))).thenReturn(documentReference);
         when(documentReference.get()).thenReturn(ApiFutures.immediateFuture(documentSnapshot));
         when(documentSnapshot.exists()).thenReturn(true);
-        when(documentSnapshot.toObject(ProfileDocument.class)).thenReturn(document);
+        when(documentSnapshot.toObject(ProfileResumeDocument.class)).thenReturn(document);
 
         when(storageClient.bucket(anyString())).thenReturn(bucket);
         when(bucket.get(anyString())).thenReturn(blob);
@@ -128,7 +128,7 @@ class ProfileDocumentServiceTest {
         }
 
         // Ensure interactions with mocks
-        verify(documentReference).set(any(ProfileDocument.class));
+        verify(documentReference).set(any(ProfileResumeDocument.class));
         verify(blob).delete();
         verify(bucket).create(anyString(), any(InputStream.class), anyString());
     }
@@ -137,34 +137,34 @@ class ProfileDocumentServiceTest {
     @Test
     void testGetDocument() throws Exception {
         String documentId = "test-id";
-        ProfileDocument document = new ProfileDocument();
-        document.setId(documentId);
+        ProfileResumeDocument document = new ProfileResumeDocument();
+        document.setResumeDocumentId(documentId);
         document.setProfileDocUrl("https://storage.googleapis.com/test-bucket/test-document.pdf");
 
         when(firestore.collection(any())).thenReturn(collectionReference);
         when(collectionReference.document(documentId)).thenReturn(documentReference);
         when(documentReference.get()).thenReturn(ApiFutures.immediateFuture(documentSnapshot));
         when(documentSnapshot.exists()).thenReturn(true);
-        when(documentSnapshot.toObject(ProfileDocument.class)).thenReturn(document);
+        when(documentSnapshot.toObject(ProfileResumeDocument.class)).thenReturn(document);
 
-        ProfileDocument result = service.getProfessionalDocument(documentId);
+        ProfileResumeDocument result = service.getProfessionalDocument(documentId);
 
         assertNotNull(result);
-        assertEquals(documentId, result.getId());
+        assertEquals(documentId, result.getResumeDocumentId());
         assertEquals("https://storage.googleapis.com/test-bucket/test-document.pdf", result.getProfileDocUrl());
     }
 
     @Test
     void testDeleteDocument() throws Exception {
         String documentId = "test-id";
-        ProfileDocument document = new ProfileDocument();
+        ProfileResumeDocument document = new ProfileResumeDocument();
         document.setProfileDocUrl("https://storage.googleapis.com/test-bucket/old-document.pdf");
 
         when(firestore.collection(any())).thenReturn(collectionReference);
         when(collectionReference.document(documentId)).thenReturn(documentReference);
         when(documentReference.get()).thenReturn(ApiFutures.immediateFuture(documentSnapshot));
         when(documentSnapshot.exists()).thenReturn(true);
-        when(documentSnapshot.toObject(ProfileDocument.class)).thenReturn(document);
+        when(documentSnapshot.toObject(ProfileResumeDocument.class)).thenReturn(document);
 
         when(storageClient.bucket(any())).thenReturn(bucket);
         when(bucket.get(any(String.class))).thenReturn(blob);

@@ -1,15 +1,17 @@
 package com.example.profiledocument.dto;
 
 import com.example.profiledocument.entity.ProfileUserSkill;
-import com.example.profiledocument.entity.UserAddress;
+import com.example.profiledocument.entity.ProfileUserAddress;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class SearchResult {
-    private ProfileUserSkill profileUserSkill;
-    private UserAddress userAddress;
+    private String searchId;
+    private List<ProfileUserAddress> matchedAddresses;
+    private List<ProfileUserSkill> matchedSkills;
 }

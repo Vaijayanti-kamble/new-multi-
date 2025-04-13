@@ -46,7 +46,7 @@ class ProfileUserSkillServiceTest {
     @BeforeEach
     void setUp() {
         profileUserSkill = new ProfileUserSkill();
-        profileUserSkill.setProfileUserSkillId("12345");
+        profileUserSkill.setUserSkillId("12345");
         profileUserSkill.setProfileUserId("user123");
         profileUserSkill.setCreatedDate(Utility.getTime(LocalDateTime.now()));
         profileUserSkill.setUpdatedDate(Utility.getTime(LocalDateTime.now()));
@@ -78,7 +78,7 @@ class ProfileUserSkillServiceTest {
 
         ProfileUserSkill result = profileUserSkillService.getProfileUserSkillById("12345");
         assertNotNull(result);
-        assertEquals("12345", result.getProfileUserSkillId());
+        assertEquals("12345", result.getUserSkillId());
     }
 
     // 🔹 Test Get ProfileUserSkill by ID (Not Found)

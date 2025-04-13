@@ -1,6 +1,6 @@
 package com.example.profiledocument.service;
 
-import com.example.profiledocument.entity.UserProfessionDetails;
+import com.example.profiledocument.entity.ProfileUserDetails;
 import com.example.profiledocument.utility.Utility;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
@@ -39,13 +39,13 @@ class UserProfessionDetailsServiceTest {
     private ApiFuture<DocumentSnapshot> documentSnapshotFuture;
 
     @InjectMocks
-    private UserProfessionDetailsService service;
+    private ProfileUserDetailsService service;
 
-    private UserProfessionDetails userProfessionDetails;
+    private ProfileUserDetails userProfessionDetails;
 
     @BeforeEach
     void setUp() {
-        userProfessionDetails = new UserProfessionDetails();
+        userProfessionDetails = new ProfileUserDetails();
         userProfessionDetails.setFirstName("kirthi");
         userProfessionDetails.setMiddleName("v");
         userProfessionDetails.setLastName("chalageri");
@@ -65,13 +65,13 @@ class UserProfessionDetailsServiceTest {
         when(firestore.collection(COLLECTION_NAME)).thenReturn(collectionReference);
         when(collectionReference.document()).thenReturn(documentReference);
         when(documentReference.getId()).thenReturn("test-id");
-        when(documentReference.set(any(UserProfessionDetails.class))).thenReturn(writeResultFuture);
+        when(documentReference.set(any(ProfileUserDetails.class))).thenReturn(writeResultFuture);
         when(writeResultFuture.get()).thenReturn(null);
 
         String savedId = service.saveUserProfessionDetails(userProfessionDetails);
 
         assertEquals("test-id", savedId);
-        verify(documentReference, times(1)).set(any(UserProfessionDetails.class));
+        verify(documentReference, times(1)).set(any(ProfileUserDetails.class));
     }
 
     @Test
@@ -83,9 +83,9 @@ class UserProfessionDetailsServiceTest {
         DocumentSnapshot documentSnapshot = mock(DocumentSnapshot.class);
         when(documentSnapshotFuture.get()).thenReturn(documentSnapshot);
         when(documentSnapshot.exists()).thenReturn(true);
-        when(documentSnapshot.toObject(UserProfessionDetails.class)).thenReturn(userProfessionDetails);
+        when(documentSnapshot.toObject(ProfileUserDetails.class)).thenReturn(userProfessionDetails);
 
-        UserProfessionDetails retrievedDetails = service.getUserProfessionDetailsById("test-id");
+        ProfileUserDetails retrievedDetails = service.getUserProfessionDetailsById("test-id");
 
         assertNotNull(retrievedDetails);
         assertEquals("kirthi", retrievedDetails.getFirstName());

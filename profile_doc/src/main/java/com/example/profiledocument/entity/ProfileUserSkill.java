@@ -2,29 +2,67 @@ package com.example.profiledocument.entity;
 
 import com.google.cloud.firestore.annotation.DocumentId;
 import com.google.cloud.firestore.annotation.PropertyName;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class ProfileUserSkill {
 
     @DocumentId
-    private String profileUserSkillId; // Unique ID
+    private String userSkillId;
+    private String profileUserId;
+    private String createdDate;
+    private String updatedDate;
+    private List<String> skills;
+
+    // Getters and Setters with @PropertyName
+
+    @PropertyName("user_skill_id")
+    public String getUserSkillId() {
+        return userSkillId;
+    }
+
+    @PropertyName("user_skill_id")
+    public void setUserSkillId(String userSkillId) {
+        this.userSkillId = userSkillId;
+    }
 
     @PropertyName("profile_user_id")
-    private String profileUserId;
+    public String getProfileUserId() {
+        return profileUserId;
+    }
+
+    @PropertyName("profile_user_id")
+    public void setProfileUserId(String profileUserId) {
+        this.profileUserId = profileUserId;
+    }
 
     @PropertyName("created_date")
-    private String createdDate;
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    @PropertyName("created_date")
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+    }
 
     @PropertyName("updated_date")
-    private String updatedDate;
+    public String getUpdatedDate() {
+        return updatedDate;
+    }
+
+    @PropertyName("updated_date")
+    public void setUpdatedDate(String updatedDate) {
+        this.updatedDate = updatedDate;
+    }
 
     @PropertyName("skills")
-    private List<String> skills;
+    public List<String> getSkills() {
+        return skills;
+    }
+
+    @PropertyName("skills")
+    public void setSkills(List<String> skills) {
+        this.skills = skills;
+    }
 }
